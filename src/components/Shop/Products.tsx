@@ -10,17 +10,20 @@ interface Props {
 }
 
 const Products: React.FC<Props> = ({
- products
+  products
 }) => {
   return (
     <section className={classes.products}>
       <h2>Buy your favorite products</h2>
       <ul>
-        <ProductItem
-          title='Test'
-          price={6}
-          description='This is a first product - amazing!'
-        />
+        {products.length > 0 && products.map(product => (
+          <ProductItem
+            key={`${product.title} ${product.description}`}
+            title={product.title}
+            price={product.price}
+            description={product.description}
+          />
+        ))}
       </ul>
     </section>
   );
