@@ -17,14 +17,11 @@ const Products: React.FC<Props> = ({
 }) => {
   return (
     <section className={classes.products}>
-      <h2>Select your favorites Pokémons</h2>
+      <h2>Select your favorites Pokémon</h2>
       <ul>
         {products.length > 0 &&
           products.map((product) => (
-            <ProductItem
-              key={`${product.name}`}
-              title={`${product.name[0].toUpperCase()}${product.name.slice(1)}`}
-            />
+            <ProductItem key={`${product.name}`} title={product.name} />
           ))}
       </ul>
       <div className={classes.buttons}>

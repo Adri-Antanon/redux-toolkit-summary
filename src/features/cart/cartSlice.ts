@@ -1,68 +1,73 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-export interface Item {
-    id: number;
-    title: string;
-    price: number;
-    quantity: number;
-    totalPrice: number;
+export interface PokemonCart {
+  id: number;
+  name: string;
+  quantity: number;
 }
 
 export interface CartState {
-    items: Item[];
-    totalQuantity: number;
+  pokemonList: PokemonCart[];
+  totalQuantity: number;
 }
 
 const initialState: CartState = {
-    items: [],
-    totalQuantity: 0,
-}
-
+  pokemonList: [],
+  totalQuantity: 0,
+};
 
 const cartSlice = createSlice({
-    name: 'cart',
-    initialState,
-    reducers: {
-        replaceCart(state, action) {
-            state.totalQuantity = action.payload.totalQuantity;
-            state.items = action.payload.items;
-        },
-        addItemToCart(state, action: PayloadAction<{ item: Item }>) {
-            const { item: newItem } = action.payload;
-            const existingItem = state.items.find((item) => item.id === newItem.id);
-            state.totalQuantity++;
-            if (!existingItem) {
-                state.items.push({
-                    id: newItem.id,
-                    price: newItem.price,
-                    quantity: 1,
-                    totalPrice: newItem.price,
-                    title: newItem.title,
-                });
-            } else if (existingItem) {
-                existingItem.quantity++;
-                existingItem.totalPrice = existingItem.totalPrice + newItem.price;
-            }
-        },
-        removeItemFromCart(state, action: PayloadAction<{ item: Item; id: number }>) {
-            const { id } = action.payload;
-            const existingItem = state.items.find((item) => item.id === id);
-
-            if (!existingItem) return;
-
-            state.totalQuantity--;
-            if (existingItem.quantity === 1) {
-                state.items = state.items.filter((item) => item.id !== id);
-            } else {
-                existingItem.quantity--;
-            }
-        },
+  name: 'cart',
+  initialState,
+  reducers: {
+    replaceCart(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.pokemonList = action.payload.items;
     },
+    addItemToCart(state, action: PayloadAction<{ item: PokemonCart }>) {
+      const { item: newItem } = action.payload;
+      const existingItem = state.pokemonList.find(
+        (pokemon) => pokemon.id === newItem.id,
+      );
+      state.totalQuantity++;
+      if (!existingItem) {
+        state.pokemonList.push({
+          id: newItem.id,
+          quantity: 1,
+          name: newItem.name,
+        });
+      } else if (existingItem) {
+        existingItem.quantity++;
+      }
+    },
+    removeItemFromCart(
+      state,
+      action: PayloadAction<{ item: PokemonCart; id: number }>,
+    ) {
+      const { id } = action.payload;
+      const existingItem = state.pokemonList.find(
+        (pokemon) => pokemon.id === id,
+      );
+
+      if (!existingItem) return;
+
+      state.totalQuantity--;
+      if (existingItem.quantity === 1) {
+        state.pokemonList = state.pokemonList.filter(
+          (pokemon) => pokemon.id !== id,
+        );
+      } else {
+        existingItem.quantity--;
+      }
+    },
+  },
 });
 
-export const { removeItemFromCart, replaceCart, addItemToCart } = cartSlice.actions;
+export const { removeItemFromCart, replaceCart, addItemToCart } =
+  cartSlice.actions;
 
-export const selectCartItems = (state: RootState) => state.cart.items;
+export const pokemonList = (state: RootState) => state.cart.pokemonList;
+// export const numberOfPokemons = (state: RootState) => state.cart.totalQuantity;
 
 export default cartSlice.reducer;

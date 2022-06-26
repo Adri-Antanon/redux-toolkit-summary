@@ -1,21 +1,26 @@
-import { useGetPokemonByNameQuery } from '../../api/pokemon';
-
 import classes from './Pokemon.module.css';
+import { Sprites } from '../../types/index';
 
-export const Pokemon = ({ name }: { name: string }) => {
-  const { data, error, isLoading } = useGetPokemonByNameQuery(name);
-  if (error) {
-    return <div>Error fetching pokemon...</div>;
-  }
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+export interface Props {
+  name: string;
+  id: number;
+  numberOfMoves: number;
+  height: number;
+  weight: number;
+  sprites: Sprites;
+}
 
-  if (!data) return null;
-
-  const { id, name: pokeName, species, moves, sprites } = data;
-
+export const Pokemon = ({
+  name: pokeName,
+  id,
+  numberOfMoves,
+  sprites,
+  height,
+  weight,
+}: Props) => {
   const pokemonName = `${pokeName[0].toUpperCase()}${pokeName.slice(1)}`;
+  const heightInMeters = (height * 0.3048) / 10;
+  const weightInKg = (weight * 0.453592) / 10;
 
   return (
     <div className={classes.pokemon}>
@@ -28,8 +33,10 @@ export const Pokemon = ({ name }: { name: string }) => {
       ) : (
         <p>Loading picture...</p>
       )}
-      {/* <img src={sprites.front_shiny} alt={species.name} /> */}
-      <p>{`Number of movements of ${moves.length}`}</p>
+      <p>{`Number of movements of ${numberOfMoves}`}</p>
+      <p>{`Height: ${heightInMeters.toFixed(
+        2,
+      )} cm and weight: ${weightInKg.toFixed(2)} kg`}</p>
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import { selectCartIsVisible } from './features/ui/uiSlice';
-import { useAppSelector } from './app/hooks';
+import { useAppDispatch, useAppSelector } from './app/hooks';
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import { useGetPokemonsQuery } from './api';
 import { useState } from 'react';
 
-const PAGE_LIMIT = 10;
+const PAGE_LIMIT = 5;
 
 function App() {
   const showCart = useAppSelector(selectCartIsVisible);
