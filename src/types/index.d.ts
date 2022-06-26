@@ -11,17 +11,17 @@ export type CartItem = {
   quantity: number;
 };
 
-// export interface Pokemon {
-//   name: string;
-//   url: string;
-// // }
+export interface Pokemon {
+  name: string;
+  url: string;
+}
 
-// export interface PokeApi {
-//   count: number;
-//   next: string;
-//   previous?: string;
-//   results: Pokemon[];
-// }
+export interface PokeData {
+  count: number;
+  next: string;
+  previous?: string;
+  results: Pokemon[];
+}
 
 export interface Ability2 {
   name: string;
@@ -339,7 +339,7 @@ export interface Type {
   type: Type2;
 }
 
-export interface Pokemon {
+export interface PokeApi {
   abilities: Ability[];
   base_experience: number;
   forms: Form[];

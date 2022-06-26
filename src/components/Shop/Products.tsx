@@ -6,9 +6,15 @@ import { Pokemon } from '../../types';
 
 interface Props {
   products: Pokemon[];
+  onNextPage: () => void;
+  onPreviousPage: () => void;
 }
 
-const Products: React.FC<Props> = ({ products }) => {
+const Products: React.FC<Props> = ({
+  products,
+  onNextPage,
+  onPreviousPage,
+}) => {
   return (
     <section className={classes.products}>
       <h2>Select your favorites Pokémons</h2>
@@ -21,7 +27,10 @@ const Products: React.FC<Props> = ({ products }) => {
             />
           ))}
       </ul>
-      <button>Next Pokémons</button>
+      <div className={classes.buttons}>
+        <button onClick={onPreviousPage}>Previous </button>
+        <button onClick={onNextPage}>Next </button>
+      </div>
     </section>
   );
 };

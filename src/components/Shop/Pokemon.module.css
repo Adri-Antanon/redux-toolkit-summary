@@ -9,6 +9,11 @@
   font-size: 1.25rem;
 }
 
+.pokemon img {
+  display: block;
+  margin: 0 auto;
+}
+
 .id {
   border-radius: 30px;
   padding: 0.15rem 1.5rem;

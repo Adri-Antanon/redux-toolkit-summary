@@ -4,11 +4,24 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import { useGetPokemonsQuery } from './api';
+import { useState } from 'react';
+
+const PAGE_LIMIT = 10;
 
 function App() {
   const showCart = useAppSelector(selectCartIsVisible);
+  const [page, setPage] = useState(0);
 
-  const { data, error, isLoading } = useGetPokemonsQuery([]);
+  const { data, error, isLoading } = useGetPokemonsQuery(page);
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + PAGE_LIMIT);
+  };
+
+  const handlePreviousPage = () => {
+    if (page === 0) return;
+    setPage((prevPage) => prevPage - PAGE_LIMIT);
+  };
 
   return (
     <Layout>
@@ -26,7 +39,13 @@ function App() {
           Loading...
         </p>
       )}
-      {data && <Products products={data.results} />}
+      {data && (
+        <Products
+          onNextPage={handleNextPage}
+          onPreviousPage={handlePreviousPage}
+          products={data.results}
+        />
+      )}
     </Layout>
   );
 }

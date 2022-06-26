@@ -1,5 +1,6 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PokeApi, Pokemon, PokeData } from '../types/index';
 
 const API_URL = 'https://pokeapi.co/api/v2/';
 
@@ -8,11 +9,13 @@ export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
-    getPokemons: builder.query({
-      query: () => '/pokemon',
+    getPokemons: builder.query<PokeData, number>({
+      query: (offset) => `/pokemon?offset=${offset}&limit=10`,
     }),
-    getPokemonByName: builder.query({
-      query: (name: string) => `pokemon/${name}`,
+    getPokemonByName: builder.query<PokeApi, string>({
+      query: (name) => `pokemon/${name}`,
+      //   transformResponse: (response: { data: PokeApi }, meta, arg) =>
+      //     response.data,
     }),
   }),
 });
