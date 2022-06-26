@@ -1,27 +1,20 @@
-import * as React from "react";
+import * as React from 'react';
 
 import Card from '../UI/Card';
+import { Pokemon } from './Pokemon';
 import classes from './ProductItem.module.css';
 
-
 interface Props {
-  title: String;
-  price: Number;
-  description: String;
+  title: string;
 }
 
-
 const ProductItem: React.FC<Props> = (props) => {
-  const { title, price, description } = props;
+  const { title } = props;
 
   return (
     <li className={classes.item}>
       <Card>
-        <header>
-          <h3>{title}</h3>
-          <div className={classes.price}>${price.toFixed(2)}</div>
-        </header>
-        <p>{description}</p>
+        <Pokemon name={title.toLocaleLowerCase()} />
         <div className={classes.actions}>
           <button>Add to Cart</button>
         </div>

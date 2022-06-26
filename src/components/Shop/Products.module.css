@@ -10,3 +10,18 @@
   margin: 0;
   padding: 0;
 }
+
+.products button {
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
+}
