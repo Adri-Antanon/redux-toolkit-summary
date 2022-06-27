@@ -24,6 +24,7 @@ const Cart = () => {
                 total: 1,
                 quantity: pokemon.quantity,
               }}
+              pokemonId={pokemon.id}
             />
           ))
         ) : (

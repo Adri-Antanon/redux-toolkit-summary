@@ -29,3 +29,13 @@ button:active {
   border-color: #1ac5d1;
   color: white;
 }
+
+.text--centered {
+  text-align: center;
+  margin: 0 1.2rem;
+  color: #fff;
+}
+
+.text--centered__img {
+  color: #000;
+}

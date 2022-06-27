@@ -31,7 +31,7 @@ export const Pokemon = ({
       {sprites ? (
         <img src={sprites.front_default} alt={pokemonName} />
       ) : (
-        <p>Loading picture...</p>
+        <p className="text--centered__img">Loading picture...</p>
       )}
       <p>{`Number of movements of ${numberOfMoves}`}</p>
       <p>{`Height: ${heightInMeters.toFixed(

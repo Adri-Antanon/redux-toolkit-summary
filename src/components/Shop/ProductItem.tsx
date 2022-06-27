@@ -22,7 +22,7 @@ const ProductItem: React.FC<Props> = (props) => {
     return <div>Error fetching pokemon...</div>;
   }
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <p className="text--centered">Loading...</p>;
   }
 
   if (!data) return null;

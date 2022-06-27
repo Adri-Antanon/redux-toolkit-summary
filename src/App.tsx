@@ -27,18 +27,7 @@ function App() {
     <Layout>
       {showCart && <Cart />}
       {error && <div>Error fetching pokemons...</div>}
-      {isLoading && (
-        <p
-          style={{
-            textAlign: 'center',
-            marginTop: '20px',
-            marginBottom: '20px',
-            color: '#fff',
-          }}
-        >
-          Loading...
-        </p>
-      )}
+      {isLoading && <p className="text--centered">Loading...</p>}
       {data && (
         <Products
           onNextPage={handleNextPage}
